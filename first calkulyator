@@ -1,0 +1,76 @@
+package com.company;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+        int first;
+        int thecond;
+        String h;
+        Scanner num = new Scanner(System.in);
+        System.out.print("The first number:");
+        first = num.nextInt();
+        System.out.print("The thecond number:");
+        thecond = num.nextInt();
+        num.nextLine();
+        System.out.print("Знак: ");
+        h = num.nextLine();
+        if (h.equals("+")) {
+            int third = func(first, thecond);
+            System.out.print("Ответ: " + third);
+        }
+        if (h.equals("-")) {
+            int four = func1(first, thecond);
+            System.out.println("Ответ: " + four);
+        }
+        if (h.equals("*")) {
+            int five = func2(first, thecond);
+            System.out.println("Ответ: " + five);
+        }
+        if (h.equals(":")) {
+
+           float six = func3(first, thecond);
+            System.out.println("Ответ: " + six);
+        }
+
+    }
+
+    public static int func(int a, int b) {
+        int c = 0;
+        if (a < 0 && b < 0) {
+            System.out.print("Error");
+        } else {
+            c = a + b;
+        }
+        return c;
+    }
+
+    public static int func1(int d, int g) {
+        int f = 0;
+        if (d < 0 && g < 0) {
+            System.out.print("Error");
+        } else {
+            f = d - g;
+        }
+        return f;
+    }
+
+    public static int func2(int gg, int rg) {
+        int f = 0;
+        if (gg < 0 && rg < 0) {
+            System.out.print("Error");
+        } else {
+            f = gg * rg;
+        }
+        return f;
+    }
+
+        public static float func3( float dd, float dg) {
+            float f=0;
+            if (dd < 0 && dg < 0) {
+                System.out.print("Error");
+            } else {
+                f = dd / dg;
+            }
+            return f;
+        }
+    }
