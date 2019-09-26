@@ -3,14 +3,15 @@ import java.util.Scanner;
 
 public class Main {
 
-
     public static void main(String[] args) {
         int g;
-        int a;
-        int b;
-        int c;
-        int d;
-        int e;
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        int d = 0;
+        int e = 0;
+        int f;
+        int max = 0;
         Scanner num = new Scanner(System.in);
         System.out.println("Метод Парето");
         System.out.println("Начальное множество: Выбор книги");
@@ -33,7 +34,7 @@ public class Main {
                 {1000, 2000, 5, 10, 0},
                 {850, 900, 5, 10, 2},
                 {450, 500, 5, 10, 1},
-                {100, 450, 5, 5, 1},
+                {1000, 450, 5, 5, 1},
                 {500, 1300, 3, 8, 1},
                 {300, 1200, 4, 10, 1},
                 {600, 1800, 5, 8, 2}
@@ -70,8 +71,8 @@ public class Main {
 
         System.out.println("Множество Парето-оптимальных исходов");
         int[][] matrix3 = new int[][]{
-                {800, 1500, 3, 7, 2},
                 {1500, 1700, 5, 10, 1},
+                {800, 1500, 3, 7, 2},
                 {100, 450, 5, 5, 1},
                 {300, 1200, 4, 10, 1},
                 {600, 1800, 5, 8, 2}
@@ -84,49 +85,158 @@ public class Main {
         System.out.println("\n 1.Сужение по верхним/нижним граница \n 2.Сужение методом субоптимизации \n 3.Сужение лексикографической оптимизации");
         System.out.print("Выбор типа (1-3): ");
         g = num.nextInt();
-        if (g < 0 || g > 3) {
+        while (g < 1 || g > 3) {
             System.out.print("Введите другое значение: ");
             g = num.nextInt();
         }
-            if (g == 1) {
-                System.out.println("Введите значения границ:");
-
-                System.out.print("Введите количество строк: ");
+        if (g == 1) {
+            System.out.println("Введите значения границ:");
+            System.out.print("Введите количество строк: ");
+            a = num.nextInt();
+            while (a > 1500 || a < 300) {
+                System.out.print("Введите другое значение: ");
                 a = num.nextInt();
-                if (a > 1500 || a < 300) {
-                    System.out.print("Введите другое значение: ");
-                    a = num.nextInt();
-                }
-                System.out.print("Введите размер стоимости: ");
+            }
+            System.out.print("Введите размер стоимости: ");
+            b = num.nextInt();
+            while (b > 1800 || b < 450) {
+                System.out.print("Введите другое значение: ");
                 b = num.nextInt();
-                if (b > 1800 || b < 450) {
-                    System.out.print("Введите другое значение: ");
-                    b = num.nextInt();
-                }
-                System.out.print("Введите значение информативности: ");
+            }
+            System.out.print("Введите значение информативности: ");
+            c = num.nextInt();
+            while (c > 5 || c < 3) {
+                System.out.print("Введите другое значение: ");
                 c = num.nextInt();
-                if (c > 5 || c < 3) {
-                    System.out.print("Введите другое значение: ");
-                    c = num.nextInt();
-                }
-                System.out.print("Введите значение смысловой нагрузки: ");
+            }
+            System.out.print("Введите значение смысловой нагрузки: ");
+            d = num.nextInt();
+            while (d > 10 || d < 5) {
+                System.out.print("Введите другое значение: ");
                 d = num.nextInt();
-                if (d > 10 || d < 5) {
-                    System.out.print("Введите другое значение: ");
-                    d = num.nextInt();
-                }
-                System.out.print("Наличие в магазине (да-1; нет-0; не везде-2): ");
+            }
+            System.out.print("Наличие в магазине (да-0; нет-2; не везде-1): ");
+            e = num.nextInt();
+            while (e > 2 || e < 0) {
+                System.out.print("Введите другое значение: ");
                 e = num.nextInt();
-                if (e > 2 || e < 0) {
-                    System.out.print("Введите другое значение: ");
-                    e = num.nextInt();
+            }
+            System.out.print("Оптимальные варианты: ");
+            func(matrix4, matrix3, a, b, c, d, e);
+        }
+        if (g == 2) {
+            System.out.print("Типы критериев:");
+            System.out.println("\n 0.Количество строк \n 1.Стоимость \n 2.Информативность \n 3.Смысловая нагрузка \n 4.Наличие в магазине (да-0; нет-2; не везде-1)");
+            String[] matrix5 = {
+                    "Количество строк",
+                    "Стоимость",
+                    "Информативность",
+                    "Смысловая нагрузка",
+                    "Наличие в магазине (да-0; нет-2; не везде-1)"
+            };
+            System.out.println("Выбирите приоритетный критерий:");
+            f = num.nextInt();
+            while (f > 4 || f < 0) {
+                System.out.print("Введите другое значение: ");
+                f = num.nextInt();
+            }
+            for (int i = 0; i < 5; i++) {
+                if (i == f) {
+                    for (int j = 0; j < matrix3.length; j++)
+                        if (matrix3[j][i] > max)
+                            max = matrix3[j][i];
+                } else {
+                    if (i == 0) {
+                        System.out.print("Введите количество строк: ");
+                        a = num.nextInt();
+                        while (a > 1500 || a < 300) {
+                            System.out.print("Введите другое значение: ");
+                            a = num.nextInt();
+                        }
+                    }
+                    if (i == 1) {
+                        System.out.print("Введите размер стоимости: ");
+                        b = num.nextInt();
+                        while (b > 1800 || b < 450) {
+                            System.out.print("Введите другое значение: ");
+                            b = num.nextInt();
+                        }
+                    }
+                    if (i == 2) {
+                        System.out.print("Введите значение информативности: ");
+                        c = num.nextInt();
+                        while (c > 5 || c < 3) {
+                            System.out.print("Введите другое значение: ");
+                            c = num.nextInt();
+                        }
+                    }
+                    if (i == 3) {
+                        System.out.print("Введите значение смысловой нагрузки: ");
+                        d = num.nextInt();
+                        while (d > 10 || d < 5) {
+                            System.out.print("Введите другое значение: ");
+                            d = num.nextInt();
+                        }
+                    }
+                    if (i == 4) {
+                        System.out.print("Наличие в магазине (да-0; нет-2; не везде-1): ");
+                        e = num.nextInt();
+                        while (e > 2 || e < 0) {
+                            System.out.print("Введите другое значение: ");
+                            e = num.nextInt();
+                        }
+                    }
                 }
             }
-            if (g == 2){
-                System.out.print("Введите важный критерий: ");
+            func2( matrix4, matrix3,  a,  b,  c,  d,  e,  f,  max);
+        }
+    }
+
+    public static void func(String[] matrix4, int[][] matrix3, int a, int b, int c, int d, int e) {
+        for (int i = 0; i < matrix3.length; i++)
+            if (matrix3[i][0] <= a && matrix3[i][1] <= b && matrix3[i][2] >= c && matrix3[i][3] >= d && matrix3[i][4] <= e) {
+                System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                System.out.print("\n");
+            }
+    }
+
+    public static void func2(String[] matrix4, int[][] matrix3, int a, int b, int c, int d, int e, int f, int max) {
+        for (int i = 0; i < matrix3.length; i++) {
+            if (f == 0){
+            if (matrix3[i][0] == max || matrix3[i][1] <= b || matrix3[i][2] >= c || matrix3[i][3] >= d || matrix3[i][4] <= e) {
+                System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                System.out.print("\n");
+                }
+            }
+            if (f == 1){
+                if (matrix3[i][0] <=a || matrix3[i][1] == max || matrix3[i][2] >= c || matrix3[i][3] >= d || matrix3[i][4] <= e) {
+                    System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                    System.out.print("\n");
+                }
+            }
+            if (f == 2){
+                if (matrix3[i][0] <= a || matrix3[i][1] <= b || matrix3[i][2] == max || matrix3[i][3] >= d || matrix3[i][4] <= e) {
+                    System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                    System.out.print("\n");
+                }
+            }
+            if (f == 3){
+                if (matrix3[i][0] <= a || matrix3[i][1] <= b || matrix3[i][2] >= c || matrix3[i][3] == max || matrix3[i][4] <= e) {
+                    System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                    System.out.print("\n");
+                }
+            }
+            if (f == 4){
+                if (matrix3[i][0] <= a || matrix3[i][1] <= b || matrix3[i][2] >= c || matrix3[i][3] >= d || matrix3[i][4] == max) {
+                    System.out.format("%10s%5d%5d%3d%3d%3d", matrix4[i], matrix3[i][0], matrix3[i][1], matrix3[i][2], matrix3[i][3], matrix3[i][4]);
+                    System.out.print("\n");
+                }
             }
         }
-        // public static int func(int a, int b, int c, int d, int e) {
-        //   for matrix3 (if )
-        //}
     }
+}
+
+
+
+
+
