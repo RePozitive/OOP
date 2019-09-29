@@ -82,10 +82,10 @@ public class Main {
             System.out.print("\n");
         }
         System.out.print("Типы Порето:");
-        System.out.println("\n 1.Сужение по верхним/нижним граница \n 2.Сужение методом субоптимизации \n 3.Сужение лексикографической оптимизации");
-        System.out.print("Выбор типа (1-3): ");
+        System.out.println("\n 1.Сужение по верхним/нижним граница \n 2.Сужение методом субоптимизации");
+        System.out.print("Выбор типа (1-2): ");
         g = num.nextInt();
-        while (g < 1 || g > 3) {
+        while (g < 1 || g > 2) {
             System.out.print("Введите другое значение: ");
             g = num.nextInt();
         }
